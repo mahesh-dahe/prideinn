@@ -14,7 +14,7 @@ export const REGISTRATION_MESSAGES = {
  * Messages related to user login.
  */
 export const LOGIN_MESSAGES = {
-  FAILED: 'Please enter valid email and password',
+  SUCCESS: 'Please enter valid email and password',
 };
 
 /**

@@ -39,14 +39,20 @@ export function makeServer({ environment = 'development' } = {}) {
     },
 
     routes() {
-      this.namespace = 'api';
+  
+
+
+
+     
+      
 
       // Add a logged-in user state to the server
-      let loggedInUser = null;
-
-      this.passthrough('http://localhost:4000/*');
-
-      this.get('/users/auth-user', () => {
+      
+      this.namespace = 'api';
+      this.passthrough('http://localhost:4000/users/register');
+      this.passthrough('http://localhost:4000/users/login');
+      
+     /** this.get('/users/auth-user', () => {
         if (loggedInUser) {
           return new Response(
             200,
@@ -84,35 +90,7 @@ export function makeServer({ environment = 'development' } = {}) {
         }
       });
 
-      this.post('/users/login', (schema, request) => {
-        const attrs = JSON.parse(request.requestBody);
-        const user = schema.users.findBy({ email: attrs.email });
-
-        if (user && user.password === attrs.password) {
-          loggedInUser = user;
-          return new Response(
-            200,
-            {},
-            {
-              data: {
-                token:
-                  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiSm9obiBKb2huIiwiaWQiOjEsImlhdCI6MTcwNzU0NTQ5MSwiZXhwIjoxNzA3NTQ5MDkxfQ.dxweIMZGiCuiViov1EfLtu3UwanUMp7TjL85hMDW4rc',
-              },
-              errors: [],
-            }
-          );
-        } else {
-          return new Response(
-            404,
-            {},
-            {
-              errors: ['User not found or invalid credentials'],
-              data: {},
-            }
-          );
-        }
-      });
-
+      
       this.post('/users/logout', (_schema, _request) => {
         loggedInUser = null;
         return new Response(
@@ -156,7 +134,7 @@ export function makeServer({ environment = 'development' } = {}) {
           );
         }
       });
-
+        
       this.patch('/users/update-profile', (schema, request) => {
         const attrs = JSON.parse(request.requestBody);
         const user = schema.users.findBy({ email: loggedInUser.email });
@@ -183,7 +161,7 @@ export function makeServer({ environment = 'development' } = {}) {
             }
           );
         }
-      });
+      });**/
 
       this.get('/users/bookings', () => {
         return new Response(
@@ -223,7 +201,7 @@ export function makeServer({ environment = 'development' } = {}) {
         );
       });
 
-      this.get('/users/payment-methods', () => {
+     /** this.get('/users/payment-methods', () => {
         return new Response(
           200,
           {},
@@ -253,7 +231,7 @@ export function makeServer({ environment = 'development' } = {}) {
             },
           }
         );
-      });
+      });**/
 
       this.get('/hotel/:hotelId/booking/enquiry', (_schema, request) => {
         let hotelId = request.params.hotelId;
@@ -336,12 +314,7 @@ export function makeServer({ environment = 'development' } = {}) {
       this.get('/hotel/:hotelId', (_schema, request) => {
         let hotelId = request.params.hotelId;
         const description = [
-          'A serene stay awaits at our plush hotel, offering a blend of luxury and comfort with top-notch amenities.',
-          'Experience the pinnacle of elegance in our beautifully designed rooms with stunning cityscape views.',
-          'Indulge in gastronomic delights at our in-house restaurants, featuring local and international cuisines.',
-          'Unwind in our state-of-the-art spa and wellness center, a perfect retreat for the senses.',
-          'Located in the heart of the city, our hotel is the ideal base for both leisure and business travelers.',
-        ];
+          ];
 
         const result = hotelsData.find((hotel) => {
           return Number(hotel.hotelCode) === Number(hotelId);
@@ -550,6 +523,16 @@ export function makeServer({ environment = 'development' } = {}) {
                       title: '3 Star',
                       value: '3',
                     },
+                    {
+                      id: '2_star_rating',
+                      title: '2 Star',
+                      value: '2',
+                    },
+                    {
+                      id: '1_star_rating',
+                      title: '1 Star',
+                      value: '1',
+                    },
                   ],
                 },
                 {
@@ -576,7 +559,7 @@ export function makeServer({ environment = 'development' } = {}) {
         );
       });
 
-      this.post('/payments/confirmation', () => {
+   /**   this.post('/payments/confirmation', () => {
         return new Promise((resolve) => {
           setTimeout(() => {
             resolve(
@@ -619,7 +602,7 @@ export function makeServer({ environment = 'development' } = {}) {
             );
           }, 6000); // 2000 milliseconds = 2 seconds
         });
-      });
+      });**/
 
       this.get('/misc/countries', () => {
         return new Response(

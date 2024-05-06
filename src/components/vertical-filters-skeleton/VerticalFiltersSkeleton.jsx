@@ -15,6 +15,7 @@ const VerticalFiltersSkeleton = () => {
         <div className="h-2 bg-gray-200 rounded-full mb-4 px-2 my-2 mt-1 w-20"></div>
         <div className="h-2 bg-gray-200 rounded-full mb-4 px-2 my-2 mt-1 w-20"></div>
       </div>
+
       <div className="my-2 px-2">
         <div className="h-2 bg-gray-200 rounded-full mb-4 px-2 my-2 mt-1 w-20"></div>
         <div className="h-2 bg-gray-200 rounded-full mb-4 px-2 my-2 mt-1 w-20"></div>

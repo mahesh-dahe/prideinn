@@ -3,7 +3,7 @@ import useOutsideClickHandler from 'hooks/useOutsideClickHandler';
 
 const DropdownButton = (props) => {
   const triggerType = props.triggerType || 'click';
-  const color = props.color || 'bg-brand';
+  const color = props.color || 'bg-red';
   const wrapperRef = useRef();
   const buttonRef = useRef();
   const [isDropdownContainerVisible, setIsDropdownContainerVisible] =

@@ -1,6 +1,7 @@
 // Usage: import { networkAdapter } from 'path/to/NetworkAdapter.js';
 // Usage: const response = await networkAdapter.get('/api/hotel/123');
-// Usage: const response = await networkAdapter.post('/api/hotel', { name: 'Hotel Name' });
+// Usage: const response = await networkAdapter.post('/api/hotel', { name: 'Hotel Nam
+
 class NetworkAdapter {
   static #API_CONFIG = {
     MIRAGE: window.location.origin,

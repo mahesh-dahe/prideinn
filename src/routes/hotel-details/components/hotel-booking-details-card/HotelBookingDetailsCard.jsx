@@ -18,8 +18,10 @@ import format from 'date-fns/format';
  */
 const HotelBookingDetailsCard = ({ hotelCode }) => {
   // State for date picker visibility
+  //const { dateRange, onDateChangeHandler } = useDateRange();
   const [isDatePickerVisible, setisDatePickerVisible] = useState(false);
 
+  const token=localStorage.getItem('token');
   const navigate = useNavigate();
 
   // State for error message
@@ -110,7 +112,7 @@ const HotelBookingDetailsCard = ({ hotelCode }) => {
   const calculatePrices = () => {
     const pricePerNight = bookingDetails.currentNightRate * selectedRooms.value;
     const gstRate =
-      pricePerNight <= 2500 ? 0.12 : pricePerNight > 7500 ? 0.18 : 0.12;
+      pricePerNight <= 2500 ? 0.12: pricePerNight > 7500 ? 0.12: 0.12;
     const totalGst = (pricePerNight * bookingPeriodDays * gstRate).toFixed(2);
     const totalPrice = (
       pricePerNight * bookingPeriodDays +
@@ -127,8 +129,20 @@ const HotelBookingDetailsCard = ({ hotelCode }) => {
       setErrorMessage('Please select check-in and check-out dates.');
       return;
     }
+
+    // Extracting necessary information
     const checkIn = format(dateRange[0].startDate, 'dd-MM-yyyy');
     const checkOut = format(dateRange[0].endDate, 'dd-MM-yyyy');
+
+    // Constructing the message
+    const message = `Hotel Code: ${hotelCode}\nCheck-in: ${checkIn}\nCheck-out: ${checkOut}\nGuests: ${selectedGuests.value}\nRooms: ${selectedRooms.value}\nHotel Name: ${bookingDetails.name.replaceAll(' ', '-')}`;
+
+    // Preparing WhatsApp link
+    const phoneNumber = '917517032423'; // Replace with your WhatsApp number
+    const whatsappLink = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+
+    // Opening WhatsApp link
+    window.open(whatsappLink, '_blank');
     const queryParams = {
       hotelCode,
       checkIn,
@@ -138,20 +152,16 @@ const HotelBookingDetailsCard = ({ hotelCode }) => {
       hotelName: bookingDetails.name.replaceAll(' ', '-'), // url friendly hotel name
     };
 
-    const url = `/checkout?${queryString.stringify(queryParams)}`;
-    navigate(url, {
-      state: {
-        total,
-        checkInTime: bookingDetails.checkInTime,
-        checkOutTime: bookingDetails.checkOutTime,
-      },
-    });
+    
   };
 
   // Handler for dismissing error message
   const dismissError = () => {
     setErrorMessage('');
   };
+  const message=()=>{
+    alert('Login First')
+  }
 
   // Effect for initial price calculation
   useEffect(() => {
@@ -173,7 +183,7 @@ const HotelBookingDetailsCard = ({ hotelCode }) => {
   }, [hotelCode]);
 
   return (
-    <div className="mx-2 bg-white shadow-xl rounded-xl overflow-hidden mt-2 md:mt-0 w-full md:w-[380px]">
+    <div className="mx-2 bg-white shadow-xl rounded-xl overflow-hidden mt-2 md:mt-0 w-full md:w-[400px]">
       <div className="px-6 py-4 bg-brand text-white">
         <h2 className="text-xl font-bold">Booking Details</h2>
       </div>
@@ -221,14 +231,7 @@ const HotelBookingDetailsCard = ({ hotelCode }) => {
         </div>
 
         {/* Room Type */}
-        <div className="mb-4">
-          <div className="font-semibold text-gray-800">Room Type</div>
-          <Select
-            value={selectedRoom}
-            onChange={handleRoomTypeChange}
-            options={roomOptions}
-          />
-        </div>
+     
 
         {/* Per day rate */}
         <div className="mb-4">
@@ -239,12 +242,12 @@ const HotelBookingDetailsCard = ({ hotelCode }) => {
         </div>
 
         {/* Taxes */}
-        <div className="mb-4">
+      
+  <div className="mb-4">
           <div className="font-semibold text-gray-800">Taxes</div>
           <div className="text-gray-600">{taxes}</div>
-          <div className="text-xs text-gray-500">{DEFAULT_TAX_DETAILS}</div>
+         
         </div>
-
         {errorMessage && (
           <Toast
             type="error"
@@ -253,13 +256,22 @@ const HotelBookingDetailsCard = ({ hotelCode }) => {
           />
         )}
       </div>
-      <div className="px-6 py-4 bg-gray-50">
+      <div className="px-6 py-7 bg-gray-50">
+        {token?(
         <button
           onClick={onBookingConfirm}
           className="w-full bg-brand-secondary text-white py-2 rounded hover:bg-yellow-600 transition duration-300"
         >
           Confirm Booking
+        </button>):
+        (
+          <button
+          onClick={message}
+          className="w-full bg-brand-secondary text-white py-2 rounded hover:bg-yellow-600 transition duration-300"
+        >
+          Login First
         </button>
+        )}
       </div>
     </div>
   );

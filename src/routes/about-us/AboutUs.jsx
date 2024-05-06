@@ -1,73 +1,72 @@
-import React from 'react';
+import { useState, useEffect } from 'react';
 
-/**
- * AboutUs component
- * @returns {jsx}
- */
-const AboutUs = () => {
+import './About.css'
+function About() {
+  const [user, setUser] = useState({ name: '', email: '' });
+
+  useEffect(() => {
+    // Fetch user's name and email from the backend
+    fetchUserData();
+  }, []); // Empty dependency array to run effect only once on mount
+
+  const fetchUserData = async () => {
+    try {
+      // Make a request to your backend to fetch the user's data
+      const response = await fetch('/api/userdata'); // Replace '/api/userdata' with your backend endpoint
+      if (!response.ok) {
+        throw new Error('Failed to fetch user data');
+      }
+      const userData = await response.json();
+      setUser(userData);
+    } catch (error) {
+      console.error('Error fetching user data:', error);
+    }
+  };
+
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-4xl font-extrabold text-brand mb-2">About Us</h1>
-      <p className="text-lg mb-8">
-        Welcome to <span className="text-brand">STAY BOOKER</span>, where we are
-        dedicated to providing you with the best experience for booking hotels
-        around the world. Our mission is to make your travel comfortable,
-        convenient, and memorable.
-      </p>
+    <>
+      <div className="about-section" id="about">
+      <div className="about-image-content">
+        <img src="/images/IMG-20240425-WA0015.jpg" alt="Doctor Group" className="about-image1" />
+      </div>
 
-      <h2 className="text-3xl font-extrabold text-brand mb-2">Our Vision</h2>
-      <p className="text-lg mb-8">
-        At <span className="text-brand">STAY BOOKER</span>, we envision a world
-        where every traveler finds the perfect accommodation that suits their
-        needs and preferences. We aim to simplify the hotel booking process,
-        offering a wide range of options for every budget.
-      </p>
-
-      <h2 className="text-3xl font-extrabold text-brand mb-2">
-        Why Choose Us?
-      </h2>
-      <ul className="list-disc ml-6 mb-8">
-        <li className="text-lg mb-3">
-          We offer a diverse range of hotels, from luxury resorts to cozy
-          boutique stays, ensuring that you find the perfect match for your
-          travel style.
-        </li>
-        <li className="text-lg mb-3">
-          Our user-friendly interface makes it simple and quick to book your
-          ideal stay. With just a few clicks, you can secure your reservation
-          hassle-free.
-        </li>
-        <li className="text-lg mb-3">
-          Our dedicated customer support team is available 24/7 to assist you
-          with any inquiries or issues you may encounter during your booking
-          process or stay.
-        </li>
-        <li className="text-lg mb-3">
-          We prioritize the security of your personal information and
-          transactions. Book with confidence, knowing that your data is safe
-          with us.
-        </li>
-      </ul>
-
-      <h2 className="text-3xl font-extrabold text-brand mb-2">Contact Us</h2>
-      <p className="text-lg mb-4">
-        Have questions or need assistance? Feel free to reach out to our
-        customer support team at{' '}
-        <a
-          className="text-brand hover:underline"
-          href="mailto:info@staybooker.com"
-        >
-          info@staybooker.com
-        </a>
-        . We're here to help!
-      </p>
-      <p className="text-lg">
-        Thank you for choosing <span className="text-brand">STAY BOOKER</span>.
-        We look forward to being your go-to platform for all your hotel booking
-        needs.
-      </p>
+      <div className="about-text-content">
+        <h3 className="about-title">
+          <span>About Us</span>
+        </h3>
+        <p className="about-description" >
+          Welcome to PrideInn, your trusted brand for hospitality and
+          personalized living in shirdi. Our experience in hospitality  industry 
+          and specialized services, prioritizing your well-being. Join us on
+          this journey towards a greater and comofrtable live of you in shirdi.
+        </p>
+        
+       
+      
+      </div>
+    <div  style={{ marginTop: '50px' }}></div>
     </div>
-  );
-};
+      <div className="bg-white rounded-lg shadow-lg p-6 flex flex-col md:flex-row"  style={{ marginTop: '50px' }}>
+        <div className="w-full md:w-1/2 pr-0 md:pr-4">
+          <div className="contact-map">
 
-export default AboutUs;
+          <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d7509.436575676944!2d74.4719373!3d19.7671201!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bdc5bbe995b7fdb%3A0x893df9242f1cfa8d!2sHotel%20Pride%20Inn!5e0!3m2!1sen!2sin!4v1714889807379!5m2!1sen!2sin" width="100%" height="250px" className="border:0;" allowfullscreen="" loading="lazy" ></iframe>
+        
+          </div>
+        </div>
+        <div className="w-full md:w-1/2 pl-0 md:pl-4">
+          <div className="contact-form">
+            <form action="./contactme.php" method="POST" className="flex flex-col space-y-4">
+              <input type="text" name="name" placeholder="Name" defaultValue={user.name} className="contact-form-txt px-4 py-2 rounded border" required />
+              <input type="email" aname="email" placeholder="Email" defaultValue={user.email} className="contact-form-email px-4 py-2 rounded border" required />
+              <textarea placeholder="Your Message" name="message" className="contact-form-txtarea px-4 py-2 rounded border" required></textarea>
+              <input type="submit" value="Submit" name="submit" className="contact-form-btn px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition duration-300" />
+            </form>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+}
+
+export default About;

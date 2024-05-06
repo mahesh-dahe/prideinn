@@ -1,6 +1,7 @@
 import { faLocationDot, faPerson } from '@fortawesome/free-solid-svg-icons';
 import DateRangePicker from 'components/ux/data-range-picker/DateRangePicker';
 import Input from 'components/ux/input/Input';
+import './search.css';
 
 /**
  * GlobalSearchBox Component
@@ -35,7 +36,7 @@ const GlobalSearchBox = (props) => {
     dateRange,
   } = props;
   return (
-    <div className="flex flex-wrap flex-col lg:flex-row hero-content__search-box">
+    <div className="c">
       <Input
         size="sm"
         value={locationInputValue}

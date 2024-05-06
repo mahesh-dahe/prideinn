@@ -31,15 +31,15 @@ describe('ResultsContainer', () => {
         filters: [
           {
             id: 'prop_type_hotel',
-            title: 'Hotel',
+            title: 'Delux Room',
           },
           {
             id: 'prop_type_apartment',
-            title: 'Apartment',
+            title: 'AC-Room',
           },
           {
             id: 'prop_type_villa',
-            title: 'Villa',
+            title: 'NON-AC room',
           },
         ],
       },

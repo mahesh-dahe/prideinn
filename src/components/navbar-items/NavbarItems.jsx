@@ -1,8 +1,7 @@
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import DropdownButton from 'components/ux/dropdown-button/DropdownButton';
-import { networkAdapter } from 'services/NetworkAdapter';
-import { useContext } from 'react';
-import { AuthContext } from 'contexts/AuthContext';
+
+import { useContext} from 'react';
 
 /**
  * A component that renders the navigation items for the navbar for both mobile/desktop view.
@@ -11,24 +10,6 @@ import { AuthContext } from 'contexts/AuthContext';
  * @param {boolean} props.isAuthenticated - A flag indicating whether the user is authenticated.
  * @param {Function} props.onHamburgerMenuToggle
  */
-const NavbarItems = ({ isAuthenticated, onHamburgerMenuToggle }) => {
-  const navigate = useNavigate();
-  const location = useLocation();
-  const context = useContext(AuthContext);
-
-  /**
-   * Handles the logout action by calling the logout API and updating the authentication state.
-   */
-  const handleLogout = async () => {
-    await networkAdapter.post('api/users/logout');
-    context.triggerAuthCheck();
-    navigate('/login');
-  };
-
-  const dropdownOptions = [
-    { name: 'Profile', onClick: () => navigate('/user-profile') },
-    { name: 'Logout', onClick: handleLogout },
-  ];
 
   /**
    * Determines if a given path is the current active path.
@@ -36,13 +17,33 @@ const NavbarItems = ({ isAuthenticated, onHamburgerMenuToggle }) => {
    * @param {string} path - The path to check.
    * @returns {boolean} - True if the path is active, false otherwise.
    */
+ 
+const NavbarItems = ({ onHamburgerMenuToggle }) => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+ 
+  const token=localStorage.getItem('token');
+
+  const handleLogout = async () => {
+   
+    
+    localStorage.removeItem('token');
+     // Update authentication status to false upon logout
+    navigate('/login');
+  };
+
+  const dropdownOptions = [
+   
+    { name: 'Logout', onClick: handleLogout },
+  ];
+
   const isActive = (path) => {
     return location.pathname === path;
   };
-
   return (
     <>
-      <li className="p-4 hover:bg-blue-900 md:hover:bg-brand">
+      <li className="p-4 hover:bg-blue-900 md:hover:bg-black">
         <Link
           to="/"
           className={`uppercase font-medium text-slate-100 hover-underline-animation ${
@@ -53,7 +54,7 @@ const NavbarItems = ({ isAuthenticated, onHamburgerMenuToggle }) => {
           Home
         </Link>
       </li>
-      <li className="p-4 hover:bg-blue-900 md:hover:bg-brand">
+      <li className="p-4 hover:bg-blue-900 md:hover:bg-black">
         <Link
           to="/hotels"
           className={`uppercase font-medium text-slate-100 hover-underline-animation ${
@@ -61,10 +62,10 @@ const NavbarItems = ({ isAuthenticated, onHamburgerMenuToggle }) => {
           }`}
           onClick={onHamburgerMenuToggle}
         >
-          Hotels
+          Rooms
         </Link>
       </li>
-      <li className="p-4 hover:bg-blue-900 md:hover:bg-brand">
+      <li className="p-4 hover:bg-black-900 md:hover:bg-black">
         <Link
           to="/about-us"
           className={`uppercase font-medium text-slate-100 hover-underline-animation ${
@@ -72,13 +73,13 @@ const NavbarItems = ({ isAuthenticated, onHamburgerMenuToggle }) => {
           }`}
           onClick={onHamburgerMenuToggle}
         >
-          About us
+          About Us
         </Link>
       </li>
       <li
-        className={`${!isAuthenticated && 'p-4 hover:bg-blue-900 md:hover:bg-brand'}`}
+        className={`${!token && 'p-4 hover:bg-black-900 md:hover:bg-black'}`}
       >
-        {isAuthenticated ? (
+        {token ? (
           <DropdownButton triggerType="click" options={dropdownOptions} />
         ) : (
           <Link
@@ -88,7 +89,7 @@ const NavbarItems = ({ isAuthenticated, onHamburgerMenuToggle }) => {
             }`}
             onClick={onHamburgerMenuToggle}
           >
-            Login/Register
+            Login/SignUp
           </Link>
         )}
       </li>

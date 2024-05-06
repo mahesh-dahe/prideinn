@@ -1,0 +1,7 @@
+.c {
+  display: flex;
+  align-items: center;
+  height: 30px;
+  margin-inline-start: 10px;
+  margin-inline-end: 10px;
+}

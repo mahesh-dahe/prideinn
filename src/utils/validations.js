@@ -1,7 +1,3 @@
-/**
- * Utility object for field validations.
- * @namespace validations
- */
 const validations = {
   /**
    * Field validation rules.

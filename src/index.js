@@ -1,8 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+
 import './index.scss';
 import HotelsSearch from './routes/listings/HotelsSearch';
-import UserProfile from './routes/user-profile/UserProfile';
+
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
 import Home from './routes/home/Home';
@@ -14,8 +15,8 @@ import Register from './routes/register/Register';
 import AboutUs from './routes/about-us/AboutUs';
 import BaseLayout from './routes/layouts/base-layout/BaseLayout';
 import ForgotPassword from './routes/forgot-password/ForgotPassword';
-import Checkout from 'routes/checkout/Checkout';
-import BookingConfirmation from 'routes/booking-confimation/BookingConifrmation';
+
+
 
 // if (process.env.NODE_ENV === 'development') {
 //   makeServer();
@@ -40,10 +41,7 @@ const router = createBrowserRouter([
         path: '/about-us',
         element: <AboutUs />,
       },
-      {
-        path: '/user-profile',
-        element: <UserProfile />,
-      },
+      
       {
         path: '/login',
         element: <Login />,
@@ -60,14 +58,7 @@ const router = createBrowserRouter([
         path: '/forgot-password',
         element: <ForgotPassword />,
       },
-      {
-        path: '/checkout',
-        element: <Checkout />,
-      },
-      {
-        path: '/booking-confirmation',
-        element: <BookingConfirmation />,
-      },
+      
     ],
   },
 ]);

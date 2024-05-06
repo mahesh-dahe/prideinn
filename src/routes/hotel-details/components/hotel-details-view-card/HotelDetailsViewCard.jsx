@@ -1,5 +1,5 @@
 import HotelBookingDetailsCard from '../hotel-booking-details-card/HotelBookingDetailsCard';
-import UserReviews from '../user-reviews/UserReviews';
+
 import { networkAdapter } from 'services/NetworkAdapter';
 import React, { useEffect, useState } from 'react';
 import ReactImageGallery from 'react-image-gallery';
@@ -61,7 +61,7 @@ const HotelDetailsViewCard = ({ hotelDetails }) => {
   }, [hotelDetails.hotelCode, currentReviewsPage]);
 
   return (
-    <div className="flex items-start justify-center flex-wrap md:flex-nowrap container mx-auto p-4">
+    <div className="flex items-start justify-center flex-wrap md:flex-nowrap container mx-auto p-4" style={{marginTop:'20px'}}>
       <div className="w-[800px] bg-white shadow-lg rounded-lg overflow-hidden">
         <div>
           <div className="relative w-full">
@@ -99,12 +99,7 @@ const HotelDetailsViewCard = ({ hotelDetails }) => {
             </div>
           </div>
         </div>
-        <UserReviews
-          reviewData={reviewData}
-          handlePageChange={handlePageChange}
-          handlePreviousPageChange={handlePreviousPageChange}
-          handleNextPageChange={handleNextPageChange}
-        />
+      
       </div>
       <HotelBookingDetailsCard hotelCode={hotelDetails.hotelCode} />
     </div>
