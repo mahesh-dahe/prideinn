@@ -31,9 +31,8 @@
       "Free Wifi"
     ],
     "price": "1800",
-   
+
     "city": "Shirdi"
-   
   },
   {
     "hotelCode": 71223,
@@ -50,7 +49,6 @@
       "No prepayment needed – pay at the property",
       "Free wifi",
       "BreakFast Rs 150 (optional)"
-     
     ],
     "price": "2500",
     "ratings": "4",
@@ -110,7 +108,6 @@
       "Free cancellation",
       "No prepayment needed – pay at the property",
       "Free wifi"
-      
     ],
     "price": "3000",
     "ratings": "4.3",
@@ -222,7 +219,7 @@
       }
     ],
     "title": "Hotel PrideInn",
-    "subtitle":" Double Bed With AC Room ",
+    "subtitle": " Double Bed With AC Room ",
     "benefits": [
       "Free cancellation",
       "No prepayment needed – pay at the property",

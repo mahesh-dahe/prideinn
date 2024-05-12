@@ -1,5 +1,4 @@
-import { faStar } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 import { Link, useNavigate } from 'react-router-dom';
 import { formatPrice } from 'utils/price-helpers';
 
@@ -25,7 +24,7 @@ const HotelViewCard = (props) => {
     subtitle,
 
     price,
-    ratings,
+
   } = props;
   const navigate = useNavigate();
   const onBookNowClick = () => {
@@ -62,7 +61,6 @@ const HotelViewCard = (props) => {
       </div>
       <div className="flex flex-col ml-0 md:ml-auto justify-between border-l-0 md:border-l-2 items-stretch pl-0 md:pl-4">
         <div className="flex justify-between my-3 md:my-0 items-center md:flex-col md:justify-between w-full h-full">
-          
           <p className="text-slate-600 font-bold whitespace-nowrap">
             ₹ {formatPrice(price)}
           </p>

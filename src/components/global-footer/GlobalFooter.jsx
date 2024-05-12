@@ -1,7 +1,7 @@
-import React from "react";
-import "./Footer.css";
+import React from 'react';
+import './Footer.css';
 
-import { Link } from "react-router-dom";
+
 
 function Footer() {
   return (
@@ -13,11 +13,11 @@ function Footer() {
               PrideInn <span className="ft-sign"></span>
             </p>
             <p className="ft-description">
-             Have One of the best stays in shirdi by staying in prideinn,we guarantee that your stay will be the best and you will too aceept it.
+              Have One of the best stays in shirdi by staying in prideinn,we
+              guarantee that your stay will be the best and you will too aceept
+              it.
             </p>
           </div>
-
-    
         </div>
 
         <div className="ft-list">
@@ -32,11 +32,8 @@ function Footer() {
             <li>
               <a href="#services">Food</a>
             </li>
-           
           </ul>
         </div>
-
-        
 
         <div className="ft-list" id="contact">
           <p className="ft-list-title">Talk To Us</p>
@@ -45,14 +42,11 @@ function Footer() {
               <a href="mailto:prideinn@gmail.com">pridinn@gmail.com</a>
             </li>
             <li>
-              <a href="mailto:appointment@healthplus.com">
-                enquiry@gmail.com
-              </a>
+              <a href="mailto:appointment@healthplus.com">enquiry@gmail.com</a>
             </li>
             <li>
               <a href="tel:7517032423">7517032423</a>
             </li>
-            
           </ul>
         </div>
       </div>
@@ -61,8 +55,6 @@ function Footer() {
         <p>© 2024 All Rights Reserved By Team PrideInn</p>
 
         <ul className="ft-social-links">
-         
-
           <li>
             <a
               href="https://facebook.com/"

@@ -3,9 +3,9 @@ import Select from 'react-select';
 import { differenceInCalendarDays } from 'date-fns';
 import DateRangePicker from 'components/ux/data-range-picker/DateRangePicker';
 import { networkAdapter } from 'services/NetworkAdapter';
-import { DEFAULT_TAX_DETAILS } from 'utils/constants';
-import { useNavigate } from 'react-router-dom';
-import queryString from 'query-string';
+
+
+
 import { formatPrice } from 'utils/price-helpers';
 import Toast from 'components/ux/toast/Toast';
 import format from 'date-fns/format';
@@ -21,8 +21,8 @@ const HotelBookingDetailsCard = ({ hotelCode }) => {
   //const { dateRange, onDateChangeHandler } = useDateRange();
   const [isDatePickerVisible, setisDatePickerVisible] = useState(false);
 
-  const token=localStorage.getItem('token');
-  const navigate = useNavigate();
+  const token = localStorage.getItem('token');
+  
 
   // State for error message
   const [errorMessage, setErrorMessage] = useState('');
@@ -37,10 +37,7 @@ const HotelBookingDetailsCard = ({ hotelCode }) => {
   ]);
 
   // State for selected room, guests, and rooms
-  const [selectedRoom, setSelectedRoom] = useState({
-    value: '1 King Bed Standard Non Smoking',
-    label: '1 King Bed Standard Non Smoking',
-  });
+  
   const [selectedGuests, setSelectedGuests] = useState({
     value: 2,
     label: '2 guests',
@@ -65,18 +62,10 @@ const HotelBookingDetailsCard = ({ hotelCode }) => {
     { length: bookingDetails.maxRoomsAllowedPerGuest },
     (_, i) => ({ value: i + 1, label: `${i + 1} room` })
   );
-  const roomOptions = [
-    {
-      value: '1 King Bed Standard Non Smoking',
-      label: '1 King Bed Standard Non Smoking',
-    },
-  ];
+ 
 
   // Handlers for select changes
-  const handleRoomTypeChange = (selectedOption) => {
-    setSelectedRoom(selectedOption);
-    calculatePrices();
-  };
+
   const handleGuestsNumberChange = (selectedOption) => {
     setSelectedGuests(selectedOption);
   };
@@ -112,7 +101,7 @@ const HotelBookingDetailsCard = ({ hotelCode }) => {
   const calculatePrices = () => {
     const pricePerNight = bookingDetails.currentNightRate * selectedRooms.value;
     const gstRate =
-      pricePerNight <= 2500 ? 0.12: pricePerNight > 7500 ? 0.12: 0.12;
+      pricePerNight <= 2500 ? 0.12 : pricePerNight > 7500 ? 0.12 : 0.12;
     const totalGst = (pricePerNight * bookingPeriodDays * gstRate).toFixed(2);
     const totalPrice = (
       pricePerNight * bookingPeriodDays +
@@ -143,31 +132,22 @@ const HotelBookingDetailsCard = ({ hotelCode }) => {
 
     // Opening WhatsApp link
     window.open(whatsappLink, '_blank');
-    const queryParams = {
-      hotelCode,
-      checkIn,
-      checkOut,
-      guests: selectedGuests.value,
-      rooms: selectedRooms.value,
-      hotelName: bookingDetails.name.replaceAll(' ', '-'), // url friendly hotel name
-    };
-
-    
+   
   };
 
   // Handler for dismissing error message
   const dismissError = () => {
     setErrorMessage('');
   };
-  const message=()=>{
-    alert('Login First')
-  }
+  const message = () => {
+    alert('Login First');
+  };
 
   // Effect for initial price calculation
   useEffect(() => {
     calculatePrices();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [bookingPeriodDays, selectedRooms, selectedRoom, bookingDetails]);
+  }, [bookingPeriodDays, selectedRooms, bookingDetails]);
 
   // Effect for fetching booking details
   useEffect(() => {
@@ -231,7 +211,6 @@ const HotelBookingDetailsCard = ({ hotelCode }) => {
         </div>
 
         {/* Room Type */}
-     
 
         {/* Per day rate */}
         <div className="mb-4">
@@ -242,11 +221,10 @@ const HotelBookingDetailsCard = ({ hotelCode }) => {
         </div>
 
         {/* Taxes */}
-      
-  <div className="mb-4">
+
+        <div className="mb-4">
           <div className="font-semibold text-gray-800">Taxes</div>
           <div className="text-gray-600">{taxes}</div>
-         
         </div>
         {errorMessage && (
           <Toast
@@ -257,20 +235,20 @@ const HotelBookingDetailsCard = ({ hotelCode }) => {
         )}
       </div>
       <div className="px-6 py-7 bg-gray-50">
-        {token?(
-        <button
-          onClick={onBookingConfirm}
-          className="w-full bg-brand-secondary text-white py-2 rounded hover:bg-yellow-600 transition duration-300"
-        >
-          Confirm Booking
-        </button>):
-        (
+        {token ? (
           <button
-          onClick={message}
-          className="w-full bg-brand-secondary text-white py-2 rounded hover:bg-yellow-600 transition duration-300"
-        >
-          Login First
-        </button>
+            onClick={onBookingConfirm}
+            className="w-full bg-brand-secondary text-white py-2 rounded hover:bg-yellow-600 transition duration-300"
+          >
+            Confirm Booking
+          </button>
+        ) : (
+          <button
+            onClick={message}
+            className="w-full bg-brand-secondary text-white py-2 rounded hover:bg-yellow-600 transition duration-300"
+          >
+            Login First
+          </button>
         )}
       </div>
     </div>

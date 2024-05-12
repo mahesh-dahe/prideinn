@@ -39,20 +39,13 @@ export function makeServer({ environment = 'development' } = {}) {
     },
 
     routes() {
-  
-
-
-
-     
-      
-
       // Add a logged-in user state to the server
-      
+
       this.namespace = 'api';
       this.passthrough('http://localhost:4000/users/register');
       this.passthrough('http://localhost:4000/users/login');
-      
-     /** this.get('/users/auth-user', () => {
+
+      /** this.get('/users/auth-user', () => {
         if (loggedInUser) {
           return new Response(
             200,
@@ -201,7 +194,7 @@ export function makeServer({ environment = 'development' } = {}) {
         );
       });
 
-     /** this.get('/users/payment-methods', () => {
+      /** this.get('/users/payment-methods', () => {
         return new Response(
           200,
           {},
@@ -313,8 +306,7 @@ export function makeServer({ environment = 'development' } = {}) {
 
       this.get('/hotel/:hotelId', (_schema, request) => {
         let hotelId = request.params.hotelId;
-        const description = [
-          ];
+        const description = [];
 
         const result = hotelsData.find((hotel) => {
           return Number(hotel.hotelCode) === Number(hotelId);
@@ -559,7 +551,7 @@ export function makeServer({ environment = 'development' } = {}) {
         );
       });
 
-   /**   this.post('/payments/confirmation', () => {
+      /**   this.post('/payments/confirmation', () => {
         return new Promise((resolve) => {
           setTimeout(() => {
             resolve(

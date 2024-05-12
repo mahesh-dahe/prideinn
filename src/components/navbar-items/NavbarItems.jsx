@@ -1,7 +1,7 @@
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import DropdownButton from 'components/ux/dropdown-button/DropdownButton';
 
-import { useContext} from 'react';
+
 
 /**
  * A component that renders the navigation items for the navbar for both mobile/desktop view.
@@ -11,32 +11,26 @@ import { useContext} from 'react';
  * @param {Function} props.onHamburgerMenuToggle
  */
 
-  /**
-   * Determines if a given path is the current active path.
-   *
-   * @param {string} path - The path to check.
-   * @returns {boolean} - True if the path is active, false otherwise.
-   */
- 
+/**
+ * Determines if a given path is the current active path.
+ *
+ * @param {string} path - The path to check.
+ * @returns {boolean} - True if the path is active, false otherwise.
+ */
+
 const NavbarItems = ({ onHamburgerMenuToggle }) => {
   const navigate = useNavigate();
   const location = useLocation();
 
- 
-  const token=localStorage.getItem('token');
+  const token = localStorage.getItem('token');
 
   const handleLogout = async () => {
-   
-    
     localStorage.removeItem('token');
-     // Update authentication status to false upon logout
+    // Update authentication status to false upon logout
     navigate('/login');
   };
 
-  const dropdownOptions = [
-   
-    { name: 'Logout', onClick: handleLogout },
-  ];
+  const dropdownOptions = [{ name: 'Logout', onClick: handleLogout }];
 
   const isActive = (path) => {
     return location.pathname === path;
@@ -76,9 +70,7 @@ const NavbarItems = ({ onHamburgerMenuToggle }) => {
           About Us
         </Link>
       </li>
-      <li
-        className={`${!token && 'p-4 hover:bg-black-900 md:hover:bg-black'}`}
-      >
+      <li className={`${!token && 'p-4 hover:bg-black-900 md:hover:bg-black'}`}>
         {token ? (
           <DropdownButton triggerType="click" options={dropdownOptions} />
         ) : (

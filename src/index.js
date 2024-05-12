@@ -16,8 +16,6 @@ import AboutUs from './routes/about-us/AboutUs';
 import BaseLayout from './routes/layouts/base-layout/BaseLayout';
 import ForgotPassword from './routes/forgot-password/ForgotPassword';
 
-
-
 // if (process.env.NODE_ENV === 'development') {
 //   makeServer();
 // }
@@ -41,7 +39,7 @@ const router = createBrowserRouter([
         path: '/about-us',
         element: <AboutUs />,
       },
-      
+
       {
         path: '/login',
         element: <Login />,
@@ -58,7 +56,6 @@ const router = createBrowserRouter([
         path: '/forgot-password',
         element: <ForgotPassword />,
       },
-      
     ],
   },
 ]);

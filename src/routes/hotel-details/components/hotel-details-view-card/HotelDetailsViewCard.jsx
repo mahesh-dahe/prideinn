@@ -1,7 +1,7 @@
 import HotelBookingDetailsCard from '../hotel-booking-details-card/HotelBookingDetailsCard';
 
-import { networkAdapter } from 'services/NetworkAdapter';
-import React, { useEffect, useState } from 'react';
+
+
 import ReactImageGallery from 'react-image-gallery';
 
 const HotelDetailsViewCard = ({ hotelDetails }) => {
@@ -12,56 +12,17 @@ const HotelDetailsViewCard = ({ hotelDetails }) => {
     thumbnailLoading: 'lazy',
   }));
 
-  const [reviewData, setReviewData] = useState({
-    isLoading: true,
-    data: [],
-  });
-  const [currentReviewsPage, setCurrentReviewPage] = useState(1);
+ 
+ 
 
-  const handlePageChange = (page) => {
-    setCurrentReviewPage(page);
-  };
 
-  const handlePreviousPageChange = () => {
-    setCurrentReviewPage((prev) => {
-      if (prev <= 1) return prev;
-      return prev - 1;
-    });
-  };
 
-  const handleNextPageChange = () => {
-    setCurrentReviewPage((prev) => {
-      if (prev >= reviewData.pagination.totalPages) return prev;
-      return prev + 1;
-    });
-  };
-
-  useEffect(() => {
-    setReviewData({
-      isLoading: true,
-      data: [],
-    });
-    const fetchHotelReviews = async () => {
-      const response = await networkAdapter.get(
-        `/api/hotel/${hotelDetails.hotelCode}/reviews`,
-        {
-          currentPage: currentReviewsPage,
-        }
-      );
-      if (response && response.data) {
-        setReviewData({
-          isLoading: false,
-          data: response.data.elements,
-          metadata: response.metadata,
-          pagination: response.paging,
-        });
-      }
-    };
-    fetchHotelReviews();
-  }, [hotelDetails.hotelCode, currentReviewsPage]);
 
   return (
-    <div className="flex items-start justify-center flex-wrap md:flex-nowrap container mx-auto p-4" style={{marginTop:'20px'}}>
+    <div
+      className="flex items-start justify-center flex-wrap md:flex-nowrap container mx-auto p-4"
+      style={{ marginTop: '20px' }}
+    >
       <div className="w-[800px] bg-white shadow-lg rounded-lg overflow-hidden">
         <div>
           <div className="relative w-full">
@@ -99,7 +60,6 @@ const HotelDetailsViewCard = ({ hotelDetails }) => {
             </div>
           </div>
         </div>
-      
       </div>
       <HotelBookingDetailsCard hotelCode={hotelDetails.hotelCode} />
     </div>

@@ -26,8 +26,6 @@
   }
 }
 
-
-
 .section-hero {
   background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
     url('DSC_2440.jpg');
@@ -44,7 +42,7 @@
   color: white;
   font-size: clamp(2.5rem, 4vw, 4rem);
 }
-.description{
+.description {
   color: white;
 }
 .btn {
@@ -100,7 +98,7 @@
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease;
-  margin-left:13px;
+  margin-left: 13px;
 }
 
 .gallery-card:hover {
@@ -146,9 +144,10 @@
 .gallery-card .description-body {
   font-size: 0.9rem;
 }
-.spaxe{
+.spaxe {
   margin-top: 10px;
   margin-bottom: 20px;
-}.head{
+}
+.head {
   align-items: center;
 }

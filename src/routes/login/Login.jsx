@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import Toast from 'components/ux/toast/Toast';
-import axios from 'axios';
+
 
 const Login = () => {
   const navigate = useNavigate();
@@ -19,13 +19,13 @@ const Login = () => {
 
   const handleLoginSubmit = async (event) => {
     event.preventDefault(); // Prevent the default form submission behavior
-    
+
     const { email, password } = loginData;
     if (!email || !password) {
       setErrorMessage('Please enter both email and password');
       return;
     }
-  
+
     try {
       const response = await fetch('http://localhost:4000/users/login', {
         method: 'POST',
@@ -34,8 +34,8 @@ const Login = () => {
         },
         body: JSON.stringify({ email, password }),
       });
-  
-      if (response.status===200) {
+
+      if (response.status === 200) {
         const { token } = await response.json();
         // Store the token in local storage
         alert('Login successful!');
@@ -49,13 +49,7 @@ const Login = () => {
       setErrorMessage('An error occurred while logging in');
     }
   };
-  
-  
 
-  const isLoggedIn = () => {
-    // Check if user is logged in based on the presence of token
-    return !!localStorage.getItem('token');
-  };
 
   const dismissError = () => {
     setErrorMessage('');
@@ -63,8 +57,10 @@ const Login = () => {
   return (
     <>
       <div className="login__form ">
-        <div className="  container mx-auto p-4 flex justify-center items-center min-h-[600px] sm:max-h-screen  
-">
+        <div
+          className="  container mx-auto p-4 flex justify-center items-center min-h-[600px] sm:max-h-screen  
+"
+        >
           <form
             onSubmit={handleLoginSubmit}
             className="w-half sm:w-1/2 max-w-md p-4 md:p-10 shadow-md"
@@ -107,7 +103,6 @@ const Login = () => {
               />
             )}
 
-            
             <div className="items-center">
               <div>
                 <button
@@ -145,7 +140,6 @@ const Login = () => {
           </form>
         </div>
       </div>
-    
     </>
   );
 };

@@ -20,14 +20,12 @@ const Register = () => {
         },
         body: JSON.stringify(values),
       });
-      const data = await response.json();
+   
 
-      if (response.status===201) {
+      if (response.status === 201) {
         setToastMessage(REGISTRATION_MESSAGES.SUCCESS);
         setShowToast(true);
         setTimeout(() => navigate('/login'), 2000);
-       
-       
       } else {
         const data = await response.json();
         setToastType('error');
@@ -35,11 +33,10 @@ const Register = () => {
         setShowToast(true);
       }
     } catch (error) {
-     
-        setToastType('error');
-        setToastMessage('Registration failed');
-        setShowToast(true);
-        console.log(error);
+      setToastType('error');
+      setToastMessage('Registration failed');
+      setShowToast(true);
+      console.log(error);
     }
   };
 
@@ -135,11 +132,7 @@ const Register = () => {
                     Back to login
                   </Link>
                   {showToast && (
-                    <Toast
-                      type={toastType}
-                      message={toastMessage}
-                    
-                    />
+                    <Toast type={toastType} message={toastMessage} />
                   )}
                 </div>
               </Form>
